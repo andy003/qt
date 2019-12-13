@@ -35,4 +35,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="update.ui">
+      <Filter>Resource Files</Filter>
+    </QtUic>
+  </ItemGroup>
 </Project>
