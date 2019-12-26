@@ -1,22 +1,21 @@
 /**
  ***********************************************************************************************************************
- * @file   RTSP.H
+ * @file   MAIN.CPP
  * @author ZhangRan
- * @date   2019/12/13
+ * @date   2019/12/17
  *
  * <h2><center>&copy; COPYRIGHT 2020 SCHRODER CORPORATION</center></h2>
  *
  ***********************************************************************************************************************
  */
 
-#ifndef RTSP_H
-#define RTSP_H
+#include "opengl.h"
+#include <QtWidgets/QApplication>
 
-class Rtsp
+int main(int argc, char *argv[])
 {
-public:
-
-};
-
-
-#endif
+    QApplication a(argc, argv);
+    OpenGLWindow w;
+    w.show();
+    return a.exec();
+}

@@ -1,16 +1,18 @@
 /**
  ***********************************************************************************************************************
- * @file   LIVE555.CPP
- * @author ZhangRan
- * @date   2019/12/13
+ * @file    MEDIA_PLAYER.CPP
+ * @author  ZhangRan
+ * @date    2019/12/24
+ * @version 1.0.0
  *
  * <h2><center>&copy; COPYRIGHT 2020 SCHRODER CORPORATION</center></h2>
  *
  ***********************************************************************************************************************
  */
 
-#include "live555.h"
+#include "media_player.h"
 
-live555::live555()
+MediaPlayer::MediaPlayer(QWidget* parent) : QMainWindow(parent)
 {
+  ui.setupUi(this);
 }

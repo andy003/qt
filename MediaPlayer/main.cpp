@@ -1,22 +1,22 @@
 /**
  ***********************************************************************************************************************
- * @file   RTSP.H
- * @author ZhangRan
- * @date   2019/12/13
+ * @file    MAIN.CPP
+ * @author  ZhangRan
+ * @date    2019/12/24
+ * @version 1.0.0
  *
  * <h2><center>&copy; COPYRIGHT 2020 SCHRODER CORPORATION</center></h2>
  *
  ***********************************************************************************************************************
  */
 
-#ifndef RTSP_H
-#define RTSP_H
+#include "media_player.h"
+#include <QtWidgets/QApplication>
 
-class Rtsp
+int main(int argc, char* argv[])
 {
-public:
-
-};
-
-
-#endif
+  QApplication a(argc, argv);
+  MediaPlayer w;
+  w.show();
+  return a.exec();
+}
