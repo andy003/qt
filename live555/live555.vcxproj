@@ -29,8 +29,8 @@
     <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>E:\work\code\qt\qt\live555\live\WindowsAudioInputDevice;E:\work\code\qt\qt\live555\live\groupsock\include;E:\work\code\qt\qt\live555\live\liveMedia\include;E:\work\code\qt\qt\live555\live\BasicUsageEnvironment\include;E:\work\code\qt\qt\live555\live\UsageEnvironment\include;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>live\WindowsAudioInputDevice;live\groupsock\include;live\liveMedia\include;live\BasicUsageEnvironment\include;live\UsageEnvironment\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -51,7 +51,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>5.12.6</QtInstall>
+    <QtInstall>msvc2017_64</QtInstall>
     <QtModules>core</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

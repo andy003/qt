@@ -28,28 +28,22 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="media_player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rtsp_client.cpp">
+    <ClCompile Include="qtguiapplication1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="media_player.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="rtsp_client.h">
+    <QtMoc Include="qtguiapplication1.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="media_player.ui">
+    <QtUic Include="qtguiapplication1.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="media_player.qrc">
+    <QtRcc Include="qtguiapplication1.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>

@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "live555", "live555\live555.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MediaPlayer", "MediaPlayer\MediaPlayer.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UsrModbus", "UsrModbus\UsrModbus.vcxproj", "{4D7273A1-7A75-425F-AAEE-693EE30F116A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,13 +28,6 @@ Global
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Any CPU.ActiveCfg = Release|x64
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|x64
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
-		{4D7273A1-7A75-425F-AAEE-693EE30F116A}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{4D7273A1-7A75-425F-AAEE-693EE30F116A}.Debug|Any CPU.Build.0 = Debug|x64
-		{4D7273A1-7A75-425F-AAEE-693EE30F116A}.Debug|x64.ActiveCfg = Debug|x64
-		{4D7273A1-7A75-425F-AAEE-693EE30F116A}.Debug|x64.Build.0 = Debug|x64
-		{4D7273A1-7A75-425F-AAEE-693EE30F116A}.Release|Any CPU.ActiveCfg = Release|x64
-		{4D7273A1-7A75-425F-AAEE-693EE30F116A}.Release|x64.ActiveCfg = Release|x64
-		{4D7273A1-7A75-425F-AAEE-693EE30F116A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
