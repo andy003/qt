@@ -89,7 +89,7 @@ public:
   /**
    * ´ò¿ª URL
    */
-  void openURL(UsageEnvironment& env, char const* progName, char const* rtspURL);
+  void open();
 
 private:
   void shutdownStream();
@@ -118,7 +118,6 @@ inline void MyRTSPClient::continueSetupSessionHandlerWrapper(RTSPClient* rtspCli
 
 inline void MyRTSPClient::afterPlayHandlerWrapper(RTSPClient* rtspClient, int resultCode, char* resultString)
 {
-
 }
 
 #endif

@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
   MyRTSPClient rtsp(*env, "rtsp://192.168.1.64:554/user=admin&password=&channel=12&stream=0.sdp?real_stream", 1, "test",
                     0);
 
-  rtsp.openURL(*env, "test", "");
+  rtsp.open();
 
   env->taskScheduler().doEventLoop(&eventLoopWatchVariable);
 

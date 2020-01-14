@@ -13,6 +13,7 @@
 #ifndef QT_DUMMY_SINK_H
 #define QT_DUMMY_SINK_H
 
+#include <assert.h>
 #include <MediaSink.hh>
 #include <MediaSession.hh>
 
@@ -22,9 +23,9 @@
 class DummySink : public MediaSink
 {
 private:
-  u_int8_t* fReceiveBuffer;
-  MediaSubsession& fSubsession;
-  char* fStreamId;
+  char* stream_;
+  uint8_t* recv_buffer_;
+  MediaSubsession& subsession_;
   static constexpr uint32_t MAX_BUF_SIZE = 1 * 1024 * 1024;
 
 public:
@@ -38,9 +39,10 @@ protected:
    * Ctor
    */
   DummySink(UsageEnvironment& env, MediaSubsession& subsession, char const* streamId)
-    : MediaSink(env), fSubsession(subsession), fStreamId(fStreamId)
+    : MediaSink(env), subsession_(subsession)
   {
-    fReceiveBuffer = new uint8_t[MAX_BUF_SIZE];
+    stream_ = _strdup(streamId);
+    recv_buffer_ = new uint8_t[MAX_BUF_SIZE];
   }
 
   /**
@@ -48,6 +50,8 @@ protected:
    */
   virtual ~DummySink()
   {
+    free(stream_);
+    delete[] recv_buffer_;
   }
 
 private:
@@ -67,34 +71,19 @@ private:
   void afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes, struct timeval presentationTime,
                          unsigned durationInMicroseconds)
   {
-    // We've just received a frame of data.  (Optionally) print out information about it:
-    if (fStreamId != NULL)
-      envir() << "Stream \"" << fStreamId << "\"; ";
-    envir() << fSubsession.mediumName() << "/" << fSubsession.codecName() << ":\tReceived " << frameSize << " bytes";
-    if (numTruncatedBytes > 0)
-      envir() << " (with " << numTruncatedBytes << " bytes truncated)";
-    char uSecsStr[6 + 1];  // used to output the 'microseconds' part of the presentation time
-    sprintf(uSecsStr, "%06u", (unsigned)presentationTime.tv_usec);
-    envir() << ".\tPresentation time: " << (int)presentationTime.tv_sec << "." << uSecsStr;
-    if (fSubsession.rtpSource() != NULL && !fSubsession.rtpSource()->hasBeenSynchronizedUsingRTCP())
-    {
-      envir() << "!";  // mark the debugging output to indicate that this presentation time is not RTCP-synchronized
-    }
-#ifdef DEBUG_PRINT_NPT
-    envir() << "\tNPT: " << fSubsession.getNormalPlayTime(presentationTime);
-#endif
-    envir() << "\n";
+    printf("\nstart\n");
+    printf("%d\n", frameSize);
+    printf("%d\n", numTruncatedBytes);
+    printf("%d\n", durationInMicroseconds);
 
-    // Then continue, to request the next frame of data:
     continuePlaying();
   }
 
   virtual Boolean continuePlaying() override
   {
-    if (fSource == NULL)
-      return False;  // sanity check (should not happen)
+    assert(fSource);
 
-    fSource->getNextFrame(fReceiveBuffer, MAX_BUF_SIZE, afterGettingFrame, this, onSourceClosure, this);
+    fSource->getNextFrame(recv_buffer_, MAX_BUF_SIZE, afterGettingFrame, this, onSourceClosure, this);
     return True;
   }
 };

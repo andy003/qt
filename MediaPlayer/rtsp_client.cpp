@@ -71,7 +71,7 @@ UsageEnvironment& operator<<(UsageEnvironment& env, const MediaSubsession& subse
   return env << subsession.mediumName() << "/" << subsession.codecName();
 }
 
-void MyRTSPClient::openURL(UsageEnvironment& env, char const* progName, char const* rtspURL)
+void MyRTSPClient::open()
 {
   sendDescribeCommand(afterDescribeHandlerWrapper);
 }
