@@ -10,28 +10,21 @@
  ***********************************************************************************************************************
  */
 
+#ifndef QT_RTSP_CLIENT_H
+#define QT_RTSP_CLIENT_H
+
 #include <NetAddress.hh>
 #include <RTSPClient.hh>
 #include <MediaSession.hh>
 #include <UsageEnvironment.hh>
 
-#ifndef QT_RTSP_CLIENT_H
-#define QT_RTSP_CLIENT_H
+#include <stdexcept>
 
-#include <QVideoWidget>
-
-class VideoWidget : public QVideoWidget
-{
-  Q_OBJECT
-
-public:
-  explicit VideoWidget(QWidget* parent = nullptr);
-
-protected:
-  void keyPressEvent(QKeyEvent* event) override;
-  void mouseDoubleClickEvent(QMouseEvent* event) override;
-  void mousePressEvent(QMouseEvent* event) override;
-};
+/*
+ *----------------------------------------------------------------------------------------------------------------------
+ *
+ *----------------------------------------------------------------------------------------------------------------------
+ */
 
 /**
  *
@@ -73,53 +66,6 @@ public:
  *
  *----------------------------------------------------------------------------------------------------------------------
  */
-
-/**
- * 虚拟槽，用来接收 RTSP 数据
- */
-class DummySink : public MediaSink
-{
-private:
-  u_int8_t* fReceiveBuffer;
-  MediaSubsession& fSubsession;
-  char* fStreamId;
-
-public:
-  static DummySink* createNew(UsageEnvironment& env, MediaSubsession& subsession, char const* streamId = NULL);
-
-private:
-  /**
-   * Ctor
-   */
-  DummySink(UsageEnvironment& env, MediaSubsession& subsession, char const* streamId);
-
-  /**
-   * Dtor
-   */
-  virtual ~DummySink();
-
-  /**
-   * Dtor
-   */
-  static void afterGettingFrame(void* clientData, unsigned frameSize, unsigned numTruncatedBytes,
-                                struct timeval presentationTime, unsigned durationInMicroseconds);
-
-  /**
-   * Dtor
-   */
-  void afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes, struct timeval presentationTime,
-                         unsigned durationInMicroseconds);
-
-private:
-  // redefined virtual functions:
-  virtual Boolean continuePlaying();
-};
-
-/*
- *----------------------------------------------------------------------------------------------------------------------
- *
- *----------------------------------------------------------------------------------------------------------------------
- */
 /**
  * RTSP 客户端
  */
@@ -147,19 +93,32 @@ public:
 
 private:
   void shutdownStream();
+  void setupNextSubsession();
   void initMediaSession(const std::string& description);
-  void setupAllSessions();
-
   void afterDescribeHandler(int resultCode, char* resultString);
+  void continueSetupSubsession(int resultCode, char* resultString);
 
+  static inline void afterPlayHandlerWrapper(RTSPClient* rtspClient, int resultCode, char* resultString);
   static inline void afterDescribeHandlerWrapper(RTSPClient* rtspClient, int resultCode, char* resultString);
+  static inline void continueSetupSessionHandlerWrapper(RTSPClient* rtspClient, int resultCode, char* resultString);
 
   friend UsageEnvironment& operator<<(UsageEnvironment& env, const RTSPClient& rtspClient);
+  friend UsageEnvironment& operator<<(UsageEnvironment& env, const MediaSubsession& subsession);
 };
 
 inline void MyRTSPClient::afterDescribeHandlerWrapper(RTSPClient* rtspClient, int resultCode, char* resultString)
 {
   static_cast<MyRTSPClient*>(rtspClient)->afterDescribeHandler(resultCode, resultString);
+}
+
+inline void MyRTSPClient::continueSetupSessionHandlerWrapper(RTSPClient* rtspClient, int resultCode, char* resultString)
+{
+  static_cast<MyRTSPClient*>(rtspClient)->continueSetupSubsession(resultCode, resultString);
+}
+
+inline void MyRTSPClient::afterPlayHandlerWrapper(RTSPClient* rtspClient, int resultCode, char* resultString)
+{
+
 }
 
 #endif

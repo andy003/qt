@@ -39,9 +39,6 @@
     <QtMoc Include="media_player.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="rtsp_client.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="media_player.ui">
@@ -52,5 +49,13 @@
     <QtRcc Include="media_player.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dummy_sink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsp_client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

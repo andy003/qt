@@ -13,10 +13,28 @@
 #include "media_player.h"
 #include <QtWidgets/QApplication>
 
+#include <BasicUsageEnvironment.hh>
+
+#include "rtsp_client.h"
+
+char eventLoopWatchVariable = 0;
+
 int main(int argc, char* argv[])
 {
-  QApplication a(argc, argv);
-  MediaPlayer w;
-  w.show();
-  return a.exec();
+  // QApplication a(argc, argv);
+  // MediaPlayer w;
+  // w.show();
+  // return a.exec();
+
+  TaskScheduler* scheduler = BasicTaskScheduler::createNew();
+  UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
+
+  MyRTSPClient rtsp(*env, "rtsp://192.168.1.64:554/user=admin&password=&channel=12&stream=0.sdp?real_stream", 1, "test",
+                    0);
+
+  rtsp.openURL(*env, "test", "");
+
+  env->taskScheduler().doEventLoop(&eventLoopWatchVariable);
+
+  return 0;
 }
